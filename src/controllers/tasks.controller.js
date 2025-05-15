@@ -80,7 +80,7 @@ export const updateTaks = async (req, res) => {
         .status(403)
         .json({ message: "No puedes actualizar esta tarea" });
 
-    if (await findTask(req.body.title, req.user.id))
+    if (await findTask(req.body.title, req.user.id, req.params.id))
       return res.status(409).json({ message: "Titulo de tarea ya existente." });
 
     const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, {
@@ -93,9 +93,13 @@ export const updateTaks = async (req, res) => {
   }
 };
 
-const findTask = async (title, userId) => {
+const findTask = async (title, userId, excludeTaskId = null) => {
   const task = await Task.findOne({ title: title, user: userId });
   if (!task) return false;
+
+  if (excludeTaskId && task._id.toString() === excludeTaskId.toString()) {
+    return false;
+  }
 
   return true;
 };

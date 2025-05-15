@@ -10,14 +10,14 @@ function Header() {
   };
 
   return (
-    <header className="min-w-screen h-20 flex items-center justify-between px-10">
+    <header className="w-full h-20 flex items-center justify-between px-4 sm:px-10">
       <div className="flex items-center gap-5">
         <Link to="/">
-          <h1 className="text-2xl font-semibold">OrganizaT</h1>
+          <h1 className="text-xl sm:text-2xl font-semibold">OrganizaT</h1>
         </Link>
         <p>Bienvenido, {user.username}</p>
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
         <Link to="/add-task">
           <button
             type="button"

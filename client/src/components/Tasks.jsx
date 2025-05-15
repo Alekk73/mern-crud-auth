@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import TaskCard from "./TaskCard";
 import { useTasks } from "../context/TaskContext";
 
-function Task() {
+function Tasks() {
   const { getTasks, tasks } = useTasks();
   const [message, setMessage] = useState("");
 
@@ -17,7 +17,7 @@ function Task() {
   }, []);
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4">
+    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       {message && (
         <p className="text-center text-sm text-gray-600 mb-4">{message}</p>
       )}
@@ -45,4 +45,4 @@ function Task() {
   );
 }
 
-export default Task;
+export default Tasks;

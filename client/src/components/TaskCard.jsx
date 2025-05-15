@@ -1,5 +1,5 @@
 import { AlertCircle, Trash2, Pencil, Eye } from "lucide-react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ConfirmDelete from "./ConfirmDelete";
 import { useState } from "react";
 import { useTasks } from "../context/TaskContext";
@@ -43,7 +43,7 @@ function TaskCard({ idTask, title, description, priority, status, date }) {
   };
 
   return (
-    <div className="relative group w-full h-48">
+    <div className="relative group w-full h-40 sm:h-48">
       <div className="absolute inset-0 z-10 flex items-center justify-center gap-6 opacity-0 group-hover:opacity-100 group-hover:flex transition-opacity">
         <button
           onClick={handleViewTaskId}
@@ -76,7 +76,9 @@ function TaskCard({ idTask, title, description, priority, status, date }) {
           ></span>
         </div>
 
-        <p className="text-sm text-gray-700 mt-2 line-clamp-2">{description}</p>
+        <p className="text-xs sm:text-sm text-gray-700 mt-2 line-clamp-2">
+          {description}
+        </p>
 
         <div className="flex items-center justify-between gap-3 mt-4">
           <div

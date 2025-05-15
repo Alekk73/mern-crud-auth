@@ -35,7 +35,7 @@ function TaskForm() {
   };
 
   return (
-    <div className="max-w-md w-full bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="max-w-md w-full bg-white rounded-lg shadow-lg overflow-hidden mt-11">
       <div className="bg-purple-600 py-6 px-8">
         <h2 className="text-white text-2xl font-bold">Crear Tarea</h2>
         <p className="text-purple-200 mt-1">Organiza tus actividades</p>
