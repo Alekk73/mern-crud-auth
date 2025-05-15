@@ -9,7 +9,7 @@ function TaskForm() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    priority: 0,
+    priority: "0",
     date: "",
   });
 

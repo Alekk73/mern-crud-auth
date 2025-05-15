@@ -1,10 +1,6 @@
 import { AlertCircle, Trash2, Pencil, Eye } from "lucide-react";
-import { useTasks } from "../context/TaskContext";
-import { useNavigate } from "react-router-dom";
 
-function TaskCard({ idTask, title, description, priority, status, date }) {
-  const { getTask } = useTasks();
-  const navigate = useNavigate();
+function TaskCard({ title, description, priority, status, date }) {
   const priorityMap = {
     0: { label: "Baja", style: "bg-green-100 text-green-700" },
     1: { label: "Media", style: "bg-yellow-100 text-yellow-700" },
