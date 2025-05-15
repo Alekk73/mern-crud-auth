@@ -27,7 +27,7 @@ function TaskForm() {
     };
 
     try {
-      const response = await createTask(payload);
+      await createTask(payload);
       navigate("/");
     } catch (error) {
       console.log(error);

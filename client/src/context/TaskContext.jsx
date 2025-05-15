@@ -1,5 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { addTaskRequest, getTasksRequest } from "../api/task";
+import {
+  addTaskRequest,
+  getTasksRequest,
+  getTaskByIdRequest,
+  updateTaskRequest,
+  deleteTaskRequest,
+} from "../api/task";
 import { useAuth } from "./AuthContext";
 
 const TaskContext = createContext();
@@ -31,13 +37,32 @@ export const TaskProvider = ({ children }) => {
     }
   };
 
+  const getTask = async (id) => {
+    const response = await getTaskByIdRequest(id);
+    return response.data;
+  };
+
   const createTask = async (task) => {
-    const response = await addTaskRequest(task);
-    return response;
+    await addTaskRequest(task);
+  };
+
+  const updateTask = async (data, id) => {
+    await updateTaskRequest(data, id);
+  };
+
+  const deleteTask = async (id) => {
+    try {
+      await deleteTaskRequest(id);
+      setTasks((prev) => prev.filter((task) => task._id !== id));
+    } catch (error) {
+      console.error("Error al eliminar la tarea:", error);
+    }
   };
 
   return (
-    <TaskContext.Provider value={{ tasks, getTasks, createTask }}>
+    <TaskContext.Provider
+      value={{ tasks, getTasks, getTask, createTask, updateTask, deleteTask }}
+    >
       {children}
     </TaskContext.Provider>
   );

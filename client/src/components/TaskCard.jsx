@@ -1,6 +1,13 @@
 import { AlertCircle, Trash2, Pencil, Eye } from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
+import ConfirmDelete from "./ConfirmDelete";
+import { useState } from "react";
+import { useTasks } from "../context/TaskContext";
 
-function TaskCard({ title, description, priority, status, date }) {
+function TaskCard({ idTask, title, description, priority, status, date }) {
+  const navigate = useNavigate();
+  const { deleteTask } = useTasks();
+  const [showAlert, setShowAlert] = useState(false);
   const priorityMap = {
     0: { label: "Baja", style: "bg-green-100 text-green-700" },
     1: { label: "Media", style: "bg-yellow-100 text-yellow-700" },
@@ -14,18 +21,51 @@ function TaskCard({ title, description, priority, status, date }) {
     3: { label: "Cancelada", style: "bg-gray-300 text-gray-800" },
   };
 
+  const handleViewTaskId = () => {
+    navigate(`/task/${idTask}`);
+  };
+
+  const handleViewTaskUpdate = () => {
+    navigate(`/update-task/${idTask}`);
+  };
+
+  const alertDelete = () => {
+    setShowAlert(true);
+  };
+
+  const handleConfirm = async () => {
+    await deleteTask(idTask);
+    setShowAlert(false);
+  };
+
+  const handleCancel = () => {
+    setShowAlert(false);
+  };
+
   return (
     <div className="relative group w-full h-48">
       <div className="absolute inset-0 z-10 flex items-center justify-center gap-6 opacity-0 group-hover:opacity-100 group-hover:flex transition-opacity">
-        <button className="w-12 h-12 flex items-center justify-center rounded-full bg-white/80 text-blue-600 hover:bg-blue-100 shadow-md transition">
+        <button
+          onClick={handleViewTaskId}
+          className="w-12 h-12 flex items-center justify-center rounded-full bg-white/80 text-blue-600 hover:bg-blue-100 shadow-md transition"
+        >
           <Eye size={24} />
         </button>
-        <button className="w-12 h-12 flex items-center justify-center rounded-full bg-white/80 text-yellow-500 hover:bg-yellow-100 shadow-md transition">
+        <button
+          onClick={handleViewTaskUpdate}
+          className="w-12 h-12 flex items-center justify-center rounded-full bg-white/80 text-yellow-500 hover:bg-yellow-100 shadow-md transition"
+        >
           <Pencil size={24} />
         </button>
-        <button className="w-12 h-12 flex items-center justify-center rounded-full bg-white/80 text-red-600 hover:bg-red-100 shadow-md transition">
+        <button
+          onClick={alertDelete}
+          className="w-12 h-12 flex items-center justify-center rounded-full bg-white/80 text-red-600 hover:bg-red-100 shadow-md transition"
+        >
           <Trash2 size={24} />
         </button>
+        {showAlert && (
+          <ConfirmDelete onConfirm={handleConfirm} onCancel={handleCancel} />
+        )}
       </div>
 
       <div className="flex flex-col justify-between w-full h-full bg-white border border-gray-200 rounded-xl shadow-sm p-4 transition group-hover:blur-sm">

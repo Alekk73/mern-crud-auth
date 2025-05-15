@@ -5,6 +5,8 @@ import RegisterView from "./views/RegisterView";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import TaskFormPage from "./views/TaskFormPage";
+import TaskView from "./views/TaskViewPage";
+import TaskUpdatePage from "./views/TaskUpdatePage";
 
 export const router = createBrowserRouter([
   // Rutas Publicas
@@ -21,6 +23,8 @@ export const router = createBrowserRouter([
     children: [
       { path: "", element: <Home /> },
       { path: "/add-task", element: <TaskFormPage /> },
+      { path: "/task/:id", element: <TaskView /> },
+      { path: "/update-task/:id", element: <TaskUpdatePage /> },
     ],
   },
 ]);
