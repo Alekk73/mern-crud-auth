@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 function Header() {
@@ -9,10 +10,22 @@ function Header() {
   };
 
   return (
-    <header className="h-20 flex items-center justify-between px-10">
-      <h1 className="text-xl font-semibold">OrganizaT</h1>
+    <header className="min-w-screen h-20 flex items-center justify-between px-10">
+      <div className="flex items-center gap-5">
+        <Link to="/">
+          <h1 className="text-2xl font-semibold">OrganizaT</h1>
+        </Link>
+        <p>Bienvenido, {user.username}</p>
+      </div>
       <div className="flex items-center gap-3">
-        <p>{user.username}</p>
+        <Link to="/add-task">
+          <button
+            type="button"
+            className="focus:outline-none text-white bg-purple-500 hover:bg-purple-400 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5"
+          >
+            Agregar Tarea
+          </button>
+        </Link>
         <button
           onClick={handleClick}
           type="button"

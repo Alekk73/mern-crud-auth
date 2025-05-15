@@ -4,6 +4,7 @@ import LoginView from "./views/LoginView";
 import RegisterView from "./views/RegisterView";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
+import TaskFormPage from "./views/TaskFormPage";
 
 export const router = createBrowserRouter([
   // Rutas Publicas
@@ -17,6 +18,9 @@ export const router = createBrowserRouter([
         <App />
       </ProtectedRoute>
     ),
-    children: [{ path: "", element: <Home /> }],
+    children: [
+      { path: "", element: <Home /> },
+      { path: "/add-task", element: <TaskFormPage /> },
+    ],
   },
 ]);

@@ -69,10 +69,10 @@ export const AuthProvider = ({ children }) => {
     setIsAuth(false);
   };
 
-  if (loading) return <div>Cargando sesión...</div>;
-
   return (
-    <AuthContext.Provider value={{ signUp, signIn, logout, user, isAuth }}>
+    <AuthContext.Provider
+      value={{ signUp, signIn, logout, user, isAuth, loading }}
+    >
       {children}
     </AuthContext.Provider>
   );
